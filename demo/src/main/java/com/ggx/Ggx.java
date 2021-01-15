@@ -17,20 +17,21 @@ public class Ggx {
     private List<Car> cars ;
 
     private Map<String,Car> carMap;
-//
-//    private Properties conf ;
+
+    private Properties conf ;
 //
 //    public Ggx() {
 //    }
 
 
-    public Ggx(String name, Integer age, String test, Car car, List<Car> cars, Map<String, Car> carMap) {
+    public Ggx(String name, Integer age, String test, Car car, List<Car> cars, Map<String, Car> carMap, Properties conf) {
         this.name = name;
         this.age = age;
         this.test = test;
         this.car = car;
         this.cars = cars;
         this.carMap = carMap;
+        this.conf = conf;
     }
 
     public String getName() {
@@ -81,6 +82,14 @@ public class Ggx {
         this.carMap = carMap;
     }
 
+    public Properties getConf() {
+        return conf;
+    }
+
+    public void setConf(Properties conf) {
+        this.conf = conf;
+    }
+
     @Override
     public String toString() {
         return "Ggx{" +
@@ -90,6 +99,7 @@ public class Ggx {
                 ", car=" + car +
                 ", cars=" + cars +
                 ", carMap=" + carMap +
+                ", conf=" + conf +
                 '}';
     }
 }
