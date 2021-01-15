@@ -77,8 +77,8 @@
             <props>
                 <prop key="username">root</prop>
                 <prop key="password">root</prop>
-                <prop key="url">root</prop>
-                <prop key="driver">root</prop>
+                <prop key="url">com.baidu.com</prop>
+                <prop key="driver">jdbc.mysql.jd.jdbc</prop>
             </props>
         </constructor-arg>
   <!--      <property name="name" value="干桂旭"></property>

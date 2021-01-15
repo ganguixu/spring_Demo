@@ -4,6 +4,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
+import java.util.Enumeration;
+import java.util.Properties;
+
 public class Main {
 
     public static ApplicationContext ctx ;
@@ -30,6 +33,14 @@ public class Main {
         Ggx ggx = (Ggx) ctx.getBean("ggx");
 
         System.out.println(ggx.toString());
+
+        Properties conf = ggx.getConf();
+        Enumeration enumeration = conf.propertyNames();
+        while (enumeration.hasMoreElements()){
+            String key = (String) enumeration.nextElement();
+            String value = conf.getProperty(key);
+            System.out.println(key+"..."+value);
+        }
 //        System.out.println(ggx.getName()+":"+ggx.getAge()+":"+ggx.getTest()+":"+ggx.getCar().getCarType()+":"+ggx.getCar().getCarAge());
     }
 }
