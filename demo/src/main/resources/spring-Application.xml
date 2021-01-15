@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <bean id="car" class="com.ggx.Car">
+        <constructor-arg type="java.lang.String" name="carType" value="奔驰A级"></constructor-arg>
+        <constructor-arg type="java.lang.Integer" name="carAge" value="3"></constructor-arg>
+    </bean>
+
+    <bean id="car1" class="com.ggx.Car">
+        <constructor-arg type="java.lang.String" name="carType" value="宝马5系"></constructor-arg>
+        <constructor-arg type="java.lang.Integer" name="carAge" value="3"></constructor-arg>
+    </bean>
+
+    <bean id="car2" class="com.ggx.Car">
+        <constructor-arg type="java.lang.String" name="carType" value="奥迪A级"></constructor-arg>
+        <constructor-arg type="java.lang.Integer" name="carAge" value="3"></constructor-arg>
+    </bean>
+
+
+    <!--
+        spring默认调用无参的构造方法创建对象
+            <property></property>
+        如果想设置不调用默认方法需要设置
+            <constructor-arg type="类型" name="需要有对应set方法" value="赋值"></constructor-arg>标签
+            如果只有一个<constructor-arg type="java.lang.String">就表示 实体类中有一个参数只有一个String类型的构造方法
+    -->
+    <bean id="ggx" class="com.ggx.Ggx">
+        <constructor-arg type="java.lang.String" name="name" value="干桂旭"></constructor-arg>
+        <constructor-arg type="java.lang.Integer" name="age" value="18"></constructor-arg>
+        <constructor-arg type="java.lang.String" name="test">
+            <!--特殊字符如下格式  <![CDATA[<abc~!>]]>  -->
+            <value><![CDATA[<abc~!>]]></value>
+        </constructor-arg>
+        <!--
+            1、引用外部对象用 ref
+            2、在<constructor-arg>标签内加一个 bean 这样的好处是外部不能访问 只能通过Ggx访问这个bean
+            3、赋null值
+        -->
+<!--        <constructor-arg type="com.ggx.Car" ref="car"></constructor-arg>-->
+        <!-- 如果就像不想为这个值初始化的话 但是构造方法中又有这个值 为了编译通过可通过赋个null值  -->
+<!--        <constructor-arg type="com.ggx.Car"><null/></constructor-arg>-->
+        <constructor-arg type="com.ggx.Car">
+            <bean id="car" class="com.ggx.Car">
+                <property name="carType" value="SUV"></property>
+                <property name="carAge" value="5"></property>
+            </bean>
+        </constructor-arg>
+
+        <constructor-arg type="java.util.List">
+            <list>
+                <bean id="car1" class="com.ggx.Car">
+                    <constructor-arg type="java.lang.String" name="carType" value="三轮小汽车"></constructor-arg>
+                    <constructor-arg type="java.lang.Integer" name="carAge" value="5"></constructor-arg>
+                </bean>
+                <bean id="car1" class="com.ggx.Car">
+                    <constructor-arg type="java.lang.String" name="carType" value="四轮小汽车"></constructor-arg>
+                    <constructor-arg type="java.lang.Integer" name="carAge" value="10"></constructor-arg>
+                </bean>
+            </list>
+        </constructor-arg>
+
+        <constructor-arg type="java.util.Map">
+            <map>
+                <entry key="beichi" value-ref="car"></entry>
+                <entry key="baoma" value-ref="car1"></entry>
+                <entry key="aodi" value-ref="car2"></entry>
+            </map>
+        </constructor-arg>
+  <!--      <property name="name" value="干桂旭"></property>
+        <property name="age" value="18"></property>-->
+    </bean>
+</beans>
